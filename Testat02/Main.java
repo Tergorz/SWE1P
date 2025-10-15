@@ -1,5 +1,6 @@
 public class Main {
 
+
     public static int inputSegment() {
         System.out.println("Bitte Anzahl der Segmente (Zahl zw. 4 & 12) festlegen. \n Eingabe: ");
         int anzahl = Input.readInt();
