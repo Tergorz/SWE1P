@@ -1,4 +1,4 @@
-public class Main {
+public class Testat02 {
 
     public static int inputSegment() {
         System.out.println("Bitte Anzahl der Segmente (Zahl zw. 4 & 12) festlegen. \n Eingabe: ");
