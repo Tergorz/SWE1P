@@ -59,6 +59,7 @@ public class Testat03 {
                 for(int i = 0; i < password.length; i++) {
                     if(input[i] == password[0]) {
                         semicorrectcount++;
+                        break;
                     }
                 }
             }
@@ -68,6 +69,7 @@ public class Testat03 {
                 for(int i = 0; i < password.length; i++) {
                     if(input[i] == password[1]) {
                         semicorrectcount++;
+                        break;
                     }
                 }
             }
@@ -77,6 +79,7 @@ public class Testat03 {
                 for(int i = 0; i < password.length; i++) {
                     if(input[i] == password[2]) {
                         semicorrectcount++;
+                        break;
                     }
                 }
             }
@@ -86,6 +89,7 @@ public class Testat03 {
                 for(int i = 0; i < password.length; i++) {
                     if(input[i] == password[3]) {
                         semicorrectcount++;
+                        break;
                     }
                 }
             }
