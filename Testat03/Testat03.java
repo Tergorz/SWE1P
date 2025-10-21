@@ -49,8 +49,6 @@ public class Testat03 {
         int correctcount = 0;
         int semicorrectcount = 0;
         char[] input = inputPassword();
-        guesscount++;
-
 
 
         while(input != password && guesscount < 10) {
