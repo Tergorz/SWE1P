@@ -30,13 +30,13 @@ public class Testat03 {
     public static char[] inputPassword() {
         char[] input = new char[4];
         System.out.println("Bite Passwort eingeben. \n Position 1: ");
-        char input[0] = Input.readChar();
+        input[0] = Input.readChar();
         System.out.println("Position 2: ");
-        char input[1] = Input.readChar();
+        input[1] = Input.readChar();
         System.out.println("Position 3: ");
-        char input[2] = Input.readChar();
+        input[2] = Input.readChar();
         System.out.println("Position 4: ");
-        char input[3] = Input.readChar();
+        input[3] = Input.readChar();
         return input;
     }
 
