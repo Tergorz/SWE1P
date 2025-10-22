@@ -104,7 +104,7 @@ public class Testat03 {
                     break;
                 case 4:
                     System.out.println("Passwort is korrekt! Du hast " + guesscount + " Versuche benötigt.");
-                    break;
+                    return;
             }
             correctcount = 0;
             semicorrectcount = 0;   
