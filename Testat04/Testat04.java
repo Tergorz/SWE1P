@@ -2,9 +2,20 @@ public class Testat04 {
 
     public static void main(String[] args) {
 
+        /*
+        #############################
+        ######## Aufgabe 1 ##########
+        #############################
+        */
+
+
         System.out.println("Bitte geben sie einen Satz mit mindestens 8 Wörtern ein");
         String input = Input.readString();
         int countWords = input.split("\\s").length;
+        String[] words = input.split("\\s");
+        StringBuilder password = new StringBuilder();
+
+
         while(countWords < 8) {
             System.out.println("Der Satz ist zu kurz.");
             System.out.println("Bitte geben sie einen Satz mit mindestens 8 Wörtern ein");
@@ -13,15 +24,16 @@ public class Testat04 {
         }
 
 
-        String[] words = input.split("\\s");
-        StringBuilder password = new StringBuilder();
 
+        /*
+        Random number generation (Linear congruential generator (LCG))
+        Source: https://stackoverflow.com/questions/13442611/how-can-i-generate-a-random-number-without-use-of-math-random/13444172#13444172
+        */
 
-        //Random number generation (Linear congruential generator (LCG))
         int max = countWords;
-        int last = (int) (System.currentTimeMillis() % max);
-        last = (last * 32719 + 3) % 32749;
-        int rand = last % max;
+        int seed = (int) (System.currentTimeMillis() % max);
+        seed = (seed * 32719 + 3) % 327;
+        int rand = seed % max;
 
 
         for (String s : words) {
@@ -56,6 +68,12 @@ public class Testat04 {
 
         System.out.println(password);
 
+        /*
+        #############################
+        ######## Aufgabe 2 ##########
+        #############################
+        */
+
         System.out.println("Bitte gib das Passwort zur Überprüfung ein.");
         String eingabe = Input.readString();
 
@@ -64,9 +82,11 @@ public class Testat04 {
                 a: referenceString == myStringB\s
                 b: referenceString.equals(myStringB)\s
                 c: referenceString.equalsIgnoreCase(myStringB)""");
-        char compare = Input.readChar();
 
+
+        char compare = Input.readChar();
         boolean correct;
+
         switch(compare) {
             case 'a':
                 correct = (eingabe == password.toString());
