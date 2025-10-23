@@ -31,17 +31,17 @@ public class Testat03 {
     public static char[] inputPassword() {
         char[] input = new char[4];
         String inputString = "";
-        System.out.println("Versuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
+        System.out.println("\n \nVersuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
         inputString = Input.readString();
         while(inputString.length() != 4 || !inputString.matches("[A-H]{4}")) {
             if(inputString.length() != 4) {
-                System.out.println("Bitte geben sie genau 4 Buchstaben ein");
+                System.out.println("Bitte geben sie genau 4 Buchstaben ein.");
             }
             if(!inputString.matches("[A-H]*")) {
                 System.out.println("Bitte geben sie nur Buchstaben zwischen 'A' und 'H' ein.");
             }
 
-            System.out.println("Versuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
+            System.out.println("\n \n Versuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
             inputString = Input.readString();
         }
         input[0] = inputString.charAt(0);
