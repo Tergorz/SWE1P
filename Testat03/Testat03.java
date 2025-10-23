@@ -3,6 +3,7 @@ import java.util.Random;
 public class Testat03 {
 
     static char[] characters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
+    static int guesscount = 0;
 
     public static char[] generatePassword() {
         Random r = new Random();
@@ -29,14 +30,25 @@ public class Testat03 {
 
     public static char[] inputPassword() {
         char[] input = new char[4];
-        System.out.println("Bite Passwort eingeben. \n Position 1: ");
-        input[0] = Input.readChar();
-        System.out.println("Position 2: ");
-        input[1] = Input.readChar();
-        System.out.println("Position 3: ");
-        input[2] = Input.readChar();
-        System.out.println("Position 4: ");
-        input[3] = Input.readChar();
+        String inputString = "";
+        System.out.println("Versuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
+        inputString = Input.readString();
+        while(inputString.length() != 4 || !inputString.matches("[A-H]{4}")) {
+            if(inputString.length() != 4) {
+                System.out.println("Bitte geben sie genau 4 Buchstaben ein");
+            }
+            if(!inputString.matches("[A-H]*")) {
+                System.out.println("Bitte geben sie nur Buchstaben zwischen 'A' und 'H' ein.");
+            }
+
+            System.out.println("Versuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
+            inputString = Input.readString();
+        }
+        input[0] = inputString.charAt(0);
+        input[1] = inputString.charAt(1);
+        input[2] = inputString.charAt(2);
+        input[3] = inputString.charAt(3);
+        guesscount++;
         return input;
     }
 
@@ -45,14 +57,12 @@ public class Testat03 {
     public static void main(String[] args) {
 
         char[] password = generatePassword();
-        int guesscount = 0;
         int correctcount = 0;
         int semicorrectcount = 0;
         char[] input = inputPassword();
 
 
         while(input != password && guesscount < 10) {
-            guesscount++;
             if(input[0] == password[0]) {
                 correctcount++;
             } else {
@@ -110,7 +120,7 @@ public class Testat03 {
             semicorrectcount = 0;   
         }
         if(guesscount == 10) {
-            System.out.println("Keine Versuche übrig");
+            System.out.println("Keine Versuche übrig. \n Das Passwort ist " + password[0] + password[1] + password[2] + password[3]);
         }
     }
 
