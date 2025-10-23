@@ -58,7 +58,7 @@ public class Testat04 {
             password.append(word);
         }
 
-        password = new StringBuilder(password.substring(0, rand) + "SWE" + password.substring(rand + 1, password.length()));
+        password = new StringBuilder(password.substring(0, rand) + "SWE" + password.substring(rand, password.length()));
 
         if(password.length() % 2 == 0) {
             password.append('?');
