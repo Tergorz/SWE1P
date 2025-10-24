@@ -120,7 +120,8 @@ public class Testat03 {
             semicorrectcount = 0;   
         }
         if(guesscount == 10) {
-            System.out.println("Keine Versuche übrig. \n Das Passwort ist " + password[0] + password[1] + password[2] + password[3]);
+            String solution = new String(password);
+            System.out.println("Keine Versuche übrig. \n Das Passwort ist " + solution);
         }
     }
 
