@@ -104,11 +104,11 @@ public class Testat04 {
                 System.out.println("Ungültige Vergleichswahl!");
         }
         /*
-         ############################ Erklärung ###########################
-         # a: Überprüft referenzielle Gleichheit (Ist gleiches String Object? → Im diesem Fall nicht → false)
-         # b: Überprüft Gleichheit der Werte (Identische Charactersequenz? → bei korrekter Eingabe true)
-         # c: Überprüft Gleichheit der Werte ohne Case-Sensitivity -> bei korrekter (auch reiner lowercase/uppercase) Eingabe true
-         ##################################################################
+         ##### Erklärung ################################################################################################################
+         # a: Überprüft referenzielle Gleichheit (Ist gleiches String Object? → In diesem Fall nicht → false)                           #
+         # b: Überprüft Gleichheit der Werte (Identische Charactersequenz? → bei korrekter Eingabe true)                                #
+         # c: Überprüft Gleichheit der Werte ohne Case-Sensitivity → bei korrekter (auch reiner lowercase/uppercase) Eingabe true       #
+         ################################################################################################################################
         */
 
     }
