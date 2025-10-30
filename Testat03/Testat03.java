@@ -4,6 +4,7 @@ public class Testat03 {
 
     static char[] characters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
     static int guesscount = 1;
+    static String history = "Deine bisherigen Eingaben: \n";
 
     public static char[] generatePassword() {
         Random r = new Random();
@@ -107,7 +108,9 @@ public class Testat03 {
                 System.out.println("Passwort is korrekt! Du hast " + (guesscount - 1) + " Versuche benötigt.");
                 return;
             } else {
+                history += "" + input[0] + input[1] + input[2] + input[3] + " | " + correctcount +"x richtig, " + semicorrectcount + "x falsche Pos. \n";
                 System.out.println("Falsch! \n " + correctcount + " Buchstaben sind an der richtigen Position, " + semicorrectcount + " sind an der falsche Position.");
+                System.out.println(history);
             }
 
 
