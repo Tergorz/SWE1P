@@ -1,6 +1,5 @@
 import java.util.Random;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class Testat03 {
 
     static char[] characters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
