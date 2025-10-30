@@ -1,9 +1,10 @@
 import java.util.Random;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class Testat03 {
 
     static char[] characters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-    static int guesscount = 0;
+    static int guesscount = 1;
 
     public static char[] generatePassword() {
         Random r = new Random();
@@ -30,8 +31,8 @@ public class Testat03 {
 
     public static char[] inputPassword() {
         char[] input = new char[4];
-        String inputString = "";
-        System.out.println("\n \nVersuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
+        String inputString;
+        System.out.println("\n \nVersuch: " + guesscount + "\n Bitte Passwort eingeben: ");
         inputString = Input.readString();
         while(inputString.length() != 4 || !inputString.matches("[A-H]{4}")) {
             if(inputString.length() != 4) {
@@ -41,7 +42,7 @@ public class Testat03 {
                 System.out.println("Bitte geben sie nur Buchstaben zwischen 'A' und 'H' ein.");
             }
 
-            System.out.println("\n \n Versuch: " + (guesscount + 1) + "\n Bitte Passwort eingeben: ");
+            System.out.println("\n \n Versuch: " + guesscount + "\n Bitte Passwort eingeben: ");
             inputString = Input.readString();
         }
         input[0] = inputString.charAt(0);
@@ -59,70 +60,65 @@ public class Testat03 {
         char[] password = generatePassword();
         int correctcount = 0;
         int semicorrectcount = 0;
-        char[] input = inputPassword();
 
 
-        while(input != password && guesscount < 10) {
-            if(input[0] == password[0]) {
+        while (guesscount <= 10) {
+            char[] input = inputPassword();
+            if (input[0] == password[0]) {
                 correctcount++;
             } else {
-                for(int i = 0; i < password.length; i++) {
-                    if(input[i] == password[0]) {
+                for (int i = 0; i < password.length; i++) {
+                    if (input[i] == password[0]) {
                         semicorrectcount++;
                         break;
                     }
                 }
             }
-            if(input[1] == password[1]) {
+            if (input[1] == password[1]) {
                 correctcount++;
             } else {
-                for(int i = 0; i < password.length; i++) {
-                    if(input[i] == password[1]) {
+                for (int i = 0; i < password.length; i++) {
+                    if (input[i] == password[1]) {
                         semicorrectcount++;
                         break;
                     }
                 }
             }
-            if(input[2] == password[2]) {
+            if (input[2] == password[2]) {
                 correctcount++;
             } else {
-                for(int i = 0; i < password.length; i++) {
-                    if(input[i] == password[2]) {
+                for (int i = 0; i < password.length; i++) {
+                    if (input[i] == password[2]) {
                         semicorrectcount++;
                         break;
                     }
                 }
             }
-            if(input[3] == password[3]) {
+            if (input[3] == password[3]) {
                 correctcount++;
             } else {
-                for(int i = 0; i < password.length; i++) {
-                    if(input[i] == password[3]) {
+                for (int i = 0; i < password.length; i++) {
+                    if (input[i] == password[3]) {
                         semicorrectcount++;
                         break;
                     }
                 }
+            }
+            if (correctcount == 4) {
+                System.out.println("Passwort is korrekt! Du hast " + (guesscount - 1) + " Versuche benötigt.");
+                return;
+            } else {
+                System.out.println("Falsch! \n " + correctcount + " Buchstaben sind an der richtigen Position, " + semicorrectcount + " sind an der falsche Position.");
             }
 
-            switch(correctcount) {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                    System.out.println("Falsch! \n " + correctcount + " Buchstaben sind an der richtigen Position, " + semicorrectcount + " sind an der falsche Position.");
-                    input = inputPassword();
-                    break;
-                case 4:
-                    System.out.println("Passwort is korrekt! Du hast " + guesscount + " Versuche benötigt.");
-                    return;
-            }
+
             correctcount = 0;
-            semicorrectcount = 0;   
+            semicorrectcount = 0;
         }
-        if(guesscount == 10) {
-            String solution = new String(password);
-            System.out.println("Keine Versuche übrig. \n Das Passwort ist " + solution);
-        }
+
+        String solution = new String(password);
+        System.out.println("Keine Versuche übrig. \n Das Passwort ist " + solution);
+
     }
 
 
