@@ -192,6 +192,8 @@ public class Testat02 {
             char repeat = Character.toLowerCase(Input.readChar());
             while (repeat == 'y') {
                 size = inputSegmentOptional();
+                y = size[0];
+                x = size[1];
                 pattern = inputPattern();
                 groesse = inputGroesse();
                 solutionOptional(y, x, pattern, groesse);
