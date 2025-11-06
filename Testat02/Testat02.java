@@ -4,8 +4,8 @@ public class Testat02 {
     public static int inputSegment() {
         System.out.println("Bitte Anzahl der Segmente (Zahl zw. 4 & 12) festlegen. \n Eingabe: ");
         int anzahl = Input.readInt();
-        while (anzahl < 3 || anzahl > 13) {
-            if (anzahl < 3) { System.out.println("Zahl zu klein. \n Eingabe: "); }
+        while (anzahl < 4 || anzahl > 12) {
+            if (anzahl < 4) { System.out.println("Zahl zu klein. \n Eingabe: "); }
             else { System.out.println("Zahl zu groß. \n Eingabe: "); }
             anzahl = Input.readInt();
         }
@@ -15,15 +15,15 @@ public class Testat02 {
     public static int[] inputSegmentOptional() {
         System.out.println("Bitte Anzahl der vertikalen Segmente (Zahl zw. 4 & 12) festlegen. \n Eingabe: ");
         int y = Input.readInt();
-        while (y < 3 || y > 13) {
-            if (y < 3) { System.out.println("Zahl zu klein. \n Eingabe: "); }
+        while (y < 4 || y > 12) {
+            if (y < 4) { System.out.println("Zahl zu klein. \n Eingabe: "); }
             else { System.out.println("Zahl zu groß. \n Eingabe: "); }
             y = Input.readInt();
         }
         System.out.println("Bitte Anzahl der horizontalen Segmente (Zahl zw. 4 & 12) festlegen. \n Eingabe: ");
         int x = Input.readInt();
-        while (x < 3 || x > 13) {
-            if (x < 3) { System.out.println("Zahl zu klein. \n Eingabe: "); }
+        while (x < 4 || x > 12) {
+            if (x < 4) { System.out.println("Zahl zu klein. \n Eingabe: "); }
             else { System.out.println("Zahl zu groß. \n Eingabe: "); }
             x = Input.readInt();
         }
