@@ -26,14 +26,15 @@ public class Testat04 {
 
 
         /*
-        Random number generation (Linear congruential generator (LCG))
-        Source: https://stackoverflow.com/questions/13442611/how-can-i-generate-a-random-number-without-use-of-math-random/13444172#13444172
+        Linear congruential generator
+        (Pseudorandom number generator)
         */
 
         int max = countWords;
-        int seed = (int) (System.currentTimeMillis() % max);
-        seed = (seed * 32719 + 3) % 327;
-        int rand = seed % max;
+        int seed = (int) (System.currentTimeMillis());
+        seed = (32719 * seed + 3) % 327; //X(n+1) = ( a * X(n) + c ) mod m
+        int rand = seed % max; //Damit Ergebnis im Bereich 0 - countWords ist
+        rand = (rand < 0 ? -rand : rand); //Damit Ergebnis nicht negativ ist
 
 
         for (String s : words) {
