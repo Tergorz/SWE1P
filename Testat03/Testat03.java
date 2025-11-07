@@ -33,8 +33,8 @@ public class Testat03 {
         char[] input = new char[4];
         String inputString;
         System.out.println("\n \nVersuch: " + guesscount + "\n Bitte Passwort eingeben: ");
-        inputString = Input.readString();
-        inputString = inputString.toUpperCase();
+        inputString = Input.readString().toUpperCase();
+
         while(inputString.length() != 4 || !inputString.matches("[A-H]{4}")) {
             if(inputString.length() != 4) {
                 System.out.println("Bitte geben sie genau 4 Buchstaben ein.");
@@ -44,8 +44,7 @@ public class Testat03 {
             }
 
             System.out.println("\n \n Versuch: " + guesscount + "\n Bitte Passwort eingeben: ");
-            inputString = Input.readString();
-            inputString = inputString.toUpperCase();
+            inputString = Input.readString().toUpperCase();
         }
         input[0] = inputString.charAt(0);
         input[1] = inputString.charAt(1);
