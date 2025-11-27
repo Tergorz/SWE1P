@@ -132,9 +132,10 @@ public class Testat05 {
                 }
                 if(countBombsAround(y, x) == 0) {
                     cascadeReveal(y, x);
+                } else {
+                    board[y][x].setRevealed();
+                    board[y][x].setValue(Character.forDigit(countBombsAround(y, x), 10));
                 }
-                board[y][x].setRevealed();
-                board[y][x].setValue(Character.forDigit(countBombsAround(y, x), 10));
                 break;
             case "flag":
                 board[y][x].setValue('#');
@@ -146,7 +147,7 @@ public class Testat05 {
     }
 
     public static void cascadeReveal(int y, int x) {
-        // Prüfen, ob das Feld bereits aufgedeckt ist oder eine Bombe enthält
+
         if (board[y][x].isRevealed() || board[y][x].isBomb()) {
             return;
         }
@@ -157,15 +158,15 @@ public class Testat05 {
         if (bombCount == 0) {
             board[y][x].setValue(' ');
 
-            // Rekursiv alle Nachbarfelder aufdecken
-            try { if(y >= 0 && x + 1 < 10 && !board[y][x + 1].isRevealed()) { cascadeReveal(y, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y >= 0 && x - 1 >= 0 && !board[y][x - 1].isRevealed()) { cascadeReveal(y, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y + 1 < 10 && x + 1 < 10 && !board[y + 1][x + 1].isRevealed()) { cascadeReveal(y + 1, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y + 1 < 10 && x >= 0 && !board[y + 1][x].isRevealed()) { cascadeReveal(y + 1, x); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y + 1 < 10 && x - 1 >= 0 && !board[y + 1][x - 1].isRevealed()) { cascadeReveal(y + 1, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y - 1 >= 0 && x + 1 < 10 && !board[y - 1][x + 1].isRevealed()) { cascadeReveal(y - 1, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y - 1 >= 0 && x >= 0 && !board[y - 1][x].isRevealed()) { cascadeReveal(y - 1, x); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-            try { if(y - 1 >= 0 && x - 1 >= 0 && !board[y - 1][x - 1].isRevealed()) { cascadeReveal(y - 1, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+
+            try { if(!board[y][x + 1].isRevealed()) { cascadeReveal(y, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y][x - 1].isRevealed()) { cascadeReveal(y, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y + 1][x + 1].isRevealed()) { cascadeReveal(y + 1, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y + 1][x].isRevealed()) { cascadeReveal(y + 1, x); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y + 1][x - 1].isRevealed()) { cascadeReveal(y + 1, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y - 1][x + 1].isRevealed()) { cascadeReveal(y - 1, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y - 1][x].isRevealed()) { cascadeReveal(y - 1, x); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(!board[y - 1][x - 1].isRevealed()) { cascadeReveal(y - 1, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
         } else {
             board[y][x].setValue(Character.forDigit(bombCount, 10));
         }
