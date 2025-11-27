@@ -58,9 +58,10 @@ public class Testat05 {
     public static void randomizeBombs() {
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++) {
-                boolean chance = new Random().nextInt(4) == 0;
+                boolean chance = new Random().nextInt(5) == 0;
                 if(chance) {
                     board[i][j].setBomb();
+                    board[i][j].setValue('#');
                 }
             }
         }
@@ -79,23 +80,33 @@ public class Testat05 {
         System.out.println("    ————————————————————");
     }
 
+    public static String getAction() {
+        System.out.println("Aktion wählen: ('reveal' / 'flag') \n");
+        String action = Input.readString();
+        while(!action.equals("reveal") && !action.equals("flag")) {
+            System.out.println("Bitte gültige aktion eingeben. \n Aktion wählen: (reveal / flag) \n");
+            action = Input.readString();
+        }
+        return action;
+    }
+
     public static int[] getInput(String action) {
         int[] input = {-1, -1};
         while(input[0] == -1 || input[1] == -1) {
             System.out.println("Bitte Koordinaten zwischen a0 - j9 eingeben: ");
-            String inputString = Input.readString();
-            char tempY = inputString.charAt(0);
+            String inputString = Input.readString().toUpperCase();
+            char tempX = inputString.charAt(0);
 
             for(int i = 0; i < characters.length; i++) {
-                if(tempY == characters[i]) {
-                    input[0] = i;
+                if(tempX == characters[i]) {
+                    input[1] = i;
                     break;
                 }
             }
 
-            int tempX = inputString.charAt(1) - '0';
-            if(tempX >= 0 && tempX <= 9) {
-                input[1] = tempX;
+            int tempY = inputString.charAt(1) - '0';
+            if(tempY >= 0 && tempY <= 9) {
+                input[0] = tempY;
             }
             if(input[0] == -1 || input[1] == -1) {
                 System.out.println("Bitte gültige Koordinaten eingeben.");
@@ -119,12 +130,11 @@ public class Testat05 {
                     board[y][x].setValue('#');
                     return FAIL;
                 }
-                if(countBombsAround(input) == 0) {
-                    board[y][x].setRevealed();
-
+                if(countBombsAround(y, x) == 0) {
+                    cascadeReveal(y, x);
                 }
                 board[y][x].setRevealed();
-                board[y][x].setValue((char)countBombsAround(input));
+                board[y][x].setValue(Character.forDigit(countBombsAround(y, x), 10));
                 break;
             case "flag":
                 board[y][x].setValue('#');
@@ -135,25 +145,36 @@ public class Testat05 {
         return SUCCESS;
     }
 
-    public static void cascadeReveal(int[] coords) {
-        int y = coords[0];
-        int x = coords[1];
+    public static void cascadeReveal(int y, int x) {
+        // Prüfen, ob das Feld bereits aufgedeckt ist oder eine Bombe enthält
+        if (board[y][x].isRevealed() || board[y][x].isBomb()) {
+            return;
+        }
+
         board[y][x].setRevealed();
-        board[y][x].setValue(' ');
-        try { if(countBombsAround(new int[]{y, x + 1}) == 0) { cascadeReveal(new int[]{y, x + 1}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y, x - 1}) == 0) { cascadeReveal(new int[]{y, x - 1}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y + 1, x + 1}) == 0) { cascadeReveal(new int[]{y + 1, x + 1}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y + 1, x}) == 0) { cascadeReveal(new int[]{y + 1, x}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y + 1, x - 1}) == 0) { cascadeReveal(new int[]{y + 1, x - 1}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y - 1, x + 1}) == 0) { cascadeReveal(new int[]{y - 1, x + 1}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y - 1, x}) == 0) { cascadeReveal(new int[]{y - 1, x}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
-        try { if(countBombsAround(new int[]{y - 1, x - 1}) == 0) { cascadeReveal(new int[]{y - 1, x - 1}); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+        int bombCount = countBombsAround(y, x);
+
+        if (bombCount == 0) {
+            board[y][x].setValue(' ');
+
+            // Rekursiv alle Nachbarfelder aufdecken
+            try { if(y >= 0 && x + 1 < 10 && !board[y][x + 1].isRevealed()) { cascadeReveal(y, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y >= 0 && x - 1 >= 0 && !board[y][x - 1].isRevealed()) { cascadeReveal(y, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y + 1 < 10 && x + 1 < 10 && !board[y + 1][x + 1].isRevealed()) { cascadeReveal(y + 1, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y + 1 < 10 && x >= 0 && !board[y + 1][x].isRevealed()) { cascadeReveal(y + 1, x); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y + 1 < 10 && x - 1 >= 0 && !board[y + 1][x - 1].isRevealed()) { cascadeReveal(y + 1, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y - 1 >= 0 && x + 1 < 10 && !board[y - 1][x + 1].isRevealed()) { cascadeReveal(y - 1, x + 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y - 1 >= 0 && x >= 0 && !board[y - 1][x].isRevealed()) { cascadeReveal(y - 1, x); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+            try { if(y - 1 >= 0 && x - 1 >= 0 && !board[y - 1][x - 1].isRevealed()) { cascadeReveal(y - 1, x - 1); } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
+        } else {
+            board[y][x].setValue(Character.forDigit(bombCount, 10));
+        }
     }
 
-    public static int countBombsAround(int[] coords) {
+
+    public static int countBombsAround(int y, int x) {
         int count = 0;
-        int y = coords[0];
-        int x = coords[1];
+
         try { if(board[y][x+1].isBomb()) { count++; } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
         try { if(board[y][x-1].isBomb()) { count++; } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
         try { if(board[y+1][x+1].isBomb()) { count++; } } catch (ArrayIndexOutOfBoundsException e) { /*do nothing*/ }
@@ -182,17 +203,18 @@ public class Testat05 {
     public static void main(String[] args) {
         generateBoard();
         randomizeBombs();
+
         while(!isBoardComplete()) {
             printBoard();
-            System.out.println("Aktion wählen: (reveal / flag) \n");
-            String action = Input.readString();
 
+            String action = getAction();
             int[] input = getInput(action);
+
             switch (handleInput(input, action)) {
                 case SUCCESS:
                     break;
                 case FAIL:
-                    System.out.println("Eine Bombe ist explodiert.");
+                    System.out.println("Eine Bombe ist explodiert. \n Game Over.");
                     return;
                 case INVALID:
                     System.out.println("Diese Koordinate wurde bereits aufgedeckt.");
