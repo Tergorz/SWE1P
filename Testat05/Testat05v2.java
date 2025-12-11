@@ -243,6 +243,8 @@ public class Testat05v2 {
         if (board[input.charAt(1) - '0'][input.charAt(0) - 'A'].isRevealed()) {
             GetUserInput("Dein ausgewähltes Feld wurde bereits aufgedeckt, bitte anderes Feld eingeben.");
         }
+        X = input.charAt(0) - 'A';
+        Y = input.charAt(1) - '0';
     }
 
 
@@ -260,10 +262,10 @@ public class Testat05v2 {
         while(count < bombCount) {
             for(int i = 0; i < 10; i++) {
                 for(int j = 0; j < 10; j++) {
-                    boolean chance = new Random().nextInt(5) == 0;
+                    boolean chance = new Random().nextInt(20) == 0;
                     if(chance && count < bombCount) {
                         board[i][j].setBomb();
-                        //board[i][j].setValue('#');
+                        board[i][j].setValue('#');
                         count++;
                     }
                 }
