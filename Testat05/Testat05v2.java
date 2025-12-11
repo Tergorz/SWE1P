@@ -105,11 +105,14 @@ public class Testat05v2 {
 
             // Determine what this reveal means
             switch (pick) {
-                case 0:
+                case INVALID:
+                    // Already revealed - should not happen as it gets checked beforehand
+                    break;
+                case FAIL:
                     // Bomb
                     gameover = true;
                     break;
-                case 1:
+                case SUCCESS:
                     // None
                     break;
             }
@@ -145,7 +148,7 @@ public class Testat05v2 {
     //                   Finish this one!
     // ####################################################
     private static boolean IsInRange(int value) {
-
+        //not needed
         if(value >= 0 && value < 10) {
             return true;
         }
@@ -321,12 +324,6 @@ public class Testat05v2 {
 
 
 
-
-
-
-
-
-
     // #########################################################
     //
     // This function reveals the direct neighbours of an "empty"
@@ -418,6 +415,7 @@ public class Testat05v2 {
         RandomizeBombs(10);
 
         // 2) Determine the number of bombs around each other spot
+        // not sure if really necessary?
         /*for (int x = 0; x < bombField.length; x++) {
             for (int y = 0; y < bombField[0].length; y++) {
 
