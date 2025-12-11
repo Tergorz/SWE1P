@@ -268,7 +268,9 @@ public class Testat05v2 {
                     boolean chance = new Random().nextInt(20) == 0;
                     if(chance && count < bombCount) {
                         board[i][j].setBomb();
-                        board[i][j].setValue('#');
+
+                        board[i][j].setValue('#'); //Only for debugging purposes
+
                         count++;
                     }
                 }
