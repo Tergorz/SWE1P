@@ -236,7 +236,7 @@ public class Testat05v2 {
             GetUserInput("Falsche Eingabe für die Spalte, bitte akzeptierten Spalten-Code eingeben.");
         }
 
-        if (input.charAt(1) < '1' || input.charAt(1) > '9') {
+        if (input.charAt(1) < '0' || input.charAt(1) > '9') {
             GetUserInput("Falsche Eingabe für die Zeile, bitte akzeptierten Zeilen-Wert eingeben.");
         }
 
