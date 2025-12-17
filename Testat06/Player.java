@@ -94,4 +94,7 @@ public class Player {
         }
         System.out.println("-------------------------");
     }
+    public Item[] getInventory() {
+        return inventory;
+    }
 }

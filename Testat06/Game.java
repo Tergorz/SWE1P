@@ -68,8 +68,14 @@ public class Game {
 
             // Check if the final room is unlocked
             if (player.getCurrentRoom().isWinningRoom()) {
-                System.out.println("Congratulations " + player.getName() + ", you win!");
+                Combat boss = new Combat(player);
+                if(boss.startCombat()) {
+                    System.out.println("Congratulations " + player.getName() + ", you win!");
+                } else {
+                    System.out.println("Game over.");
+                }
                 break;
+
             }
 
         }
