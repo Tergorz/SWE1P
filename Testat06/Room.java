@@ -96,7 +96,10 @@ public class Room {
      */
     public Item getItem(String itemName) {
         for (Item item : items) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
+            if(item == null) {
+                System.out.println("Item does not exist.");
+                return null;
+            } else if(item.getName().equalsIgnoreCase(itemName)) {
                 return item;
             }
         }
