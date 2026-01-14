@@ -2,7 +2,9 @@ public class Exam {
 
     public static void main(String[] args) {
         //Aufgabe1();
-        Aufgabe2();
+        //Aufgabe2();
+        Windspeed wind = new Windspeed(100.0);
+        System.out.println(wind.getBeaufortScale());
     }
 
     public static void Aufgabe1() {
@@ -68,6 +70,37 @@ public class Exam {
         password2 = new char[]{'1', 'P', 'a', 's', 's', 'w', '0', 'r', 't'};
         System.out.println(isGoodPassword(password));
         System.out.println(isGoodPassword(password2));
+
+    }
+
+    public static class Windspeed {
+        private double kiloemeterPerHour;
+
+        public Windspeed(double kilometerPerHour) {
+            this.kiloemeterPerHour = kilometerPerHour;
+        }
+        public boolean windstill() {
+            return this.kiloemeterPerHour < 2.0;
+        }
+        public boolean orkan() {
+            return this.kiloemeterPerHour > 120.0;
+        }
+        public double getKilometerPerHour() {
+            return this.kiloemeterPerHour;
+        }
+        public double getKnotsPerHour() {
+            return this.kiloemeterPerHour / 1.852;
+        }
+        public int getBeaufortScale() {
+            /*double bhochdreihalbe;
+            bhochdreihalbe = this.kiloemeterPerHour / 3.01;
+            int b = (int) (bhochdreihalbe / Math.sqrt(bhochdreihalbe));
+            */
+            int b = (int) (Math.pow(getKilometerPerHour() / 3.01, 0.6666) + 0.5);
+            if(b > 12) { b = 12; }
+            return b;
+
+        }
 
     }
 
