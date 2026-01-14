@@ -96,7 +96,7 @@ public class Exam {
             bhochdreihalbe = this.kiloemeterPerHour / 3.01;
             int b = (int) (bhochdreihalbe / Math.sqrt(bhochdreihalbe));
             */
-            int b = (int) (Math.pow(getKilometerPerHour() / 3.01, 0.6666) + 0.5);
+            int b = (int) Math.pow(getKilometerPerHour() / 3.01, 0.6666) ;
             if(b > 12) { b = 12; }
             return b;
 
